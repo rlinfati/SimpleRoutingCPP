@@ -28,6 +28,8 @@ endif()
 if(UNIX)
     message("-- UNIX -- CFLAG/CXXFLAG: -Wall -Wextra")
     target_compile_options(sVRP PRIVATE -Wall -Wextra)
+    message("-- UNIX -- SKIP RPATH: TRUE")
+    set(CMAKE_SKIP_RPATH TRUE)
 endif()
 
 if(APPLE)

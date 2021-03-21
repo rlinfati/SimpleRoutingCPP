@@ -159,4 +159,7 @@ target_compile_definitions(lkhlocal PRIVATE TWO_LEVEL_TREE)
 
 add_executable(lkhexe EXCLUDE_FROM_ALL SRC/LKHmain.c)
 target_include_directories(lkhexe PRIVATE SRC/INCLUDE)
-target_link_libraries(lkhexe lkhlocal m)
+target_link_libraries(lkhexe lkhlocal)
+if(UNIX)
+    target_link_libraries(lkhexe m)
+endif()

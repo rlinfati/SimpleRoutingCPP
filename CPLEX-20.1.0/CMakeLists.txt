@@ -1,6 +1,6 @@
 if (CMAKE_SYSTEM_NAME MATCHES "Darwin")
 
-set(CPLEX_LIB ${CMAKE_CURRENT_SOURCE_DIR}/cplex/lib/x86-64_osx/static_pic/libcplex.a)
+set(CPLEX_LIB ${CMAKE_CURRENT_SOURCE_DIR}/cplex/bin/x86-64_osx/libcplex2010.dylib)
 set(CONCERT_LIB ${CMAKE_CURRENT_SOURCE_DIR}/concert/lib/x86-64_osx/static_pic/libconcert.a)
 set(ILOCPLEX_LIB ${CMAKE_CURRENT_SOURCE_DIR}/cplex/lib/x86-64_osx/static_pic/libilocplex.a)
 set(CPLEX_LID ${CPLEX_LIB})
@@ -11,7 +11,7 @@ set(CPLEX_EXTRALIB "")
 
 elseif (CMAKE_SYSTEM_NAME MATCHES "Linux")
 
-set(CPLEX_LIB ${CMAKE_CURRENT_SOURCE_DIR}/cplex/lib/x86-64_linux/static_pic/libcplex.a)
+set(CPLEX_LIB ${CMAKE_CURRENT_SOURCE_DIR}/cplex/bin/x86-64_linux/libcplex2010.so)
 set(CONCERT_LIB ${CMAKE_CURRENT_SOURCE_DIR}/concert/lib/x86-64_linux/static_pic/libconcert.a)
 set(ILOCPLEX_LIB ${CMAKE_CURRENT_SOURCE_DIR}/cplex/lib/x86-64_linux/static_pic/libilocplex.a)
 set(CPLEX_LID ${CPLEX_LIB})
@@ -33,10 +33,13 @@ set(CPLEX_EXTRALIB "")
 
 endif()
 
-add_library(cplex-library STATIC IMPORTED GLOBAL)
+add_library(cplex-library SHARED IMPORTED GLOBAL)
 set_target_properties(cplex-library PROPERTIES
     IMPORTED_LOCATION ${CPLEX_LIB}
     IMPORTED_LOCATION_DEBUG ${CPLEX_LID}
+    IMPORTED_IMPLIB ${CPLEX_LIB}
+    IMPORTED_IMPLIB_DEBUG ${CPLEX_LID}
+    IMPORTED_NO_SONAME TRUE
     INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_CURRENT_SOURCE_DIR}/cplex/include
     INTERFACE_LINK_LIBRARIES "${CPLEX_EXTRALIB}")
 
@@ -54,4 +57,3 @@ set_target_properties(ilocplex PROPERTIES
     INTERFACE_LINK_LIBRARIES "cplex-concert;cplex-library")
 
 file(COPY ${CPLEX_DLL} DESTINATION ${CMAKE_BINARY_DIR})
-
