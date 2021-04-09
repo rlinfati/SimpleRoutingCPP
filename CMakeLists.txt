@@ -46,6 +46,8 @@ if(UNIX AND NOT APPLE)
     message("-- LINUX -- CFLAG/CXXFLAG:  -march=nehalem -mtune=haswell")
     add_compile_options(                 -march=nehalem -mtune=haswell)
     target_compile_options(sVRP PRIVATE  -march=nehalem -mtune=haswell)
+    message("-- LINUX -- STATIC libgcc and libstdc++")
+    target_link_libraries(sVRP -static-libgcc -static-libstdc++)
 endif()
 
 add_subdirectory(LKH-3.0.3)

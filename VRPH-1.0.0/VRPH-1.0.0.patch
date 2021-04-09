@@ -1,0 +1,14 @@
+diff -ur VRPH-1.0.0-orig/src/VRPGenerator.cpp VRPH-1.0.0/src/VRPGenerator.cpp
+--- VRPH-1.0.0-orig/src/VRPGenerator.cpp	2010-04-07 11:01:46.000000000 -0400
++++ VRPH-1.0.0/src/VRPGenerator.cpp	2018-11-23 18:21:01.000000000 -0300
+@@ -47,8 +47,8 @@
+ 		for(i=1;i<=A;i++)
+ 		{
+ 			w++;
+-			x = ((double)g) * cos(2.0*(((double)i)-1)*PI/((double)A));
+-			y = ((double)g) * sin(2.0*(((double)i)-1)*PI/((double)A));
++			x = ((double)g) * cos(2.0*(((double)i)-1)*VRPH_PI/((double)A));
++			y = ((double)g) * sin(2.0*(((double)i)-1)*VRPH_PI/((double)A));
+ 			fprintf(out,"%d %2.4f %2.4f\n",w,x,y);
+ 		}
+ 	}
