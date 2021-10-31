@@ -1,6 +1,6 @@
 project(sVRP)
 
-cmake_minimum_required(VERSION 3.11)
+cmake_minimum_required(VERSION 3.18)
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_CXX_STANDARD 17)
 set_property(DIRECTORY PROPERTY VS_STARTUP_PROJECT sVRP)
@@ -41,11 +41,12 @@ endif()
 # avx  - sandybridge ivybridge         - corei7-avx
 # avx2 - haswell     broadwell skylake - core-avx2
 # gcc -march=native -dM -E - < /dev/null | egrep "tune|SSE|AVX" | sort
+# sudo yum install --enablerepo=codeready-builder-for-rhel-8-x86_64-rpms libstdc++-static
 
 if(UNIX AND NOT APPLE)
-    message("-- LINUX -- CFLAG/CXXFLAG:  -march=nehalem -mtune=haswell")
-    add_compile_options(                 -march=nehalem -mtune=haswell)
-    target_compile_options(sVRP PRIVATE  -march=nehalem -mtune=haswell)
+    message("-- LINUX -- CFLAG/CXXFLAG:  -march=sandybridge -mtune=haswell")
+    add_compile_options(                 -march=sandybridge -mtune=haswell)
+    target_compile_options(sVRP PRIVATE  -march=sandybridge -mtune=haswell)
     message("-- LINUX -- STATIC libgcc and libstdc++")
     target_link_libraries(sVRP -static-libgcc -static-libstdc++)
 endif()
