@@ -1,6 +1,6 @@
 project(sVRP)
 
-cmake_minimum_required(VERSION 3.18)
+cmake_minimum_required(VERSION 3.20)
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_CXX_STANDARD 17)
 set_property(DIRECTORY PROPERTY VS_STARTUP_PROJECT sVRP)
@@ -57,8 +57,8 @@ target_link_libraries(sVRP lkhlocal)
 add_subdirectory(VRPH-1.0.0)
 target_link_libraries(sVRP vrphlocal)
 
-add_subdirectory(CPLEX-20.1.0)
+add_subdirectory(CPLEX-22.10)
 target_link_libraries(sVRP ilocplex)
 
-add_subdirectory(GUROBI-9.1.0)
+add_subdirectory(GUROBI-9.5)
 target_link_libraries(sVRP gurobi-cpp)
